@@ -1,0 +1,38 @@
+---
+title: "Exploratory data visualizations"
+author: "Tomiris"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+```{r}
+library(tidyverse)
+
+# load the data
+amazon <- read_csv("amazon.csv")
+
+# create a histogram of the price variable
+ggplot(amazon, aes(x = price)) +
+  geom_histogram() +
+  labs(x = "Price of the product in £",
+       y = "Count",
+       title = "Histogram of Amazon Product Prices") +
+  theme_bw()
+```
+
+The histogram of the Amazon product prices shows that the distribution of prices is strongly skewed to the right. While most products in the data set cost up to £100, prices for some products range up to £1,000.
+
+```{r}
+# create a satterplot of average rating vs price
+ggplot(amazon, aes(x = price, y = avg_rating)) +
+  geom_point() +
+  labs(x = "Price of the product in £",
+       y = "Average rating of reviews",
+       title = "Scatter plot of Average Rating vs Price") +
+  theme_bw()
+```
+
+There seems to be no relationship between the average rating and price of the product, however, we can see that the most expensive products in the data set all have the highest average ratings.
